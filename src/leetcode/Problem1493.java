@@ -10,6 +10,37 @@ public class Problem1493 {
     }
 
     static public int longestSubarray(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1 && nums[0] == 0) {
+            return 0;
+        }
+
+        int n = nums.length;
+        int maxLen = 0;
+        int left = 0; // Length of 1s to the left of the zero
+        int right = 0; // Length of 1s to the right of the zero
+        boolean zeroFound = false; // Flag to check if at least one zero is found
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 1) {
+                right++;
+            } else {
+                zeroFound = true;
+                maxLen = Math.max(maxLen, left + right);
+                left = right; // Now left becomes right
+                right = 0; // Reset right after a zero
+            }
+        }
+
+        maxLen = Math.max(maxLen, left + right); // In case the array ends with 1s
+
+        // If no zero was found, the result should be the array length minus one
+        return zeroFound ? maxLen : n - 1;
+    }
+
+    static public int longestSubarray1(int[] nums) {
         int left = 0;
         int right = 0;
         int zeroCount = 0;
