@@ -1,12 +1,19 @@
 package leetcode;
 
-import java.util.Arrays;
-
 public class Problem345 {
 
     public static void main(String[] args) {
+        System.out.println(reverseVowels("IceCreAm"));
         System.out.println(reverseVowels("hello"));
         System.out.println(reverseVowels("leetcode"));
+
+        System.out.println(reverseVowels1("IceCreAm"));
+        System.out.println(reverseVowels1("hello"));
+        System.out.println(reverseVowels1("leetcode"));
+
+        System.out.println(reverseVowels2("IceCreAm"));
+        System.out.println(reverseVowels2("hello"));
+        System.out.println(reverseVowels2("leetcode"));
     }
 
     // Most efficient solution
