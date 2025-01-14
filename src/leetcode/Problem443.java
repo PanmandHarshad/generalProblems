@@ -8,6 +8,7 @@ public class Problem443 {
         System.out.println(compress(new char[]{'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}));
     }
 
+    // Time complexity: O(n), Space complexity: O(log n)
     static public int compress(char[] chars) {
         int length = chars.length;
         if (length == 1) {
