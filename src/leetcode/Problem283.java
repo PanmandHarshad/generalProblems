@@ -22,43 +22,21 @@ public class Problem283 {
         System.out.println();
     }
 
+    // Most efficient solution
     static public void moveZeroes(int[] nums) {
         if (nums == null || nums.length == 1) {
             return;
         }
 
-        int count = 0;
+        int index = 0;
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) {
-                count++;
-            } else if (count > 0) {
-                nums[i - count] = nums[i];
-                nums[i] = 0;
+            if (nums[i] != 0) {
+                nums[index++] = nums[i];
             }
         }
-    }
-
-    public int maxArea(int[] height) {
-        if (height == null || height.length < 2)
-            return 0;
-
-        int left = 0;
-        int right = height.length - 1;
-        int maxArea = 0;
-
-        while (left < right) {
-            int minHeight = Math.min(height[left], height[right]);
-            maxArea = Math.max(maxArea, (right - left) * minHeight);
-
-            while (left < height.length && height[left] <= minHeight) {
-                left++;
-            }
-
-            while (right > 0 && height[right] <= minHeight) {
-                right--;
-            }
+        while (index < nums.length) {
+            nums[index++] = 0;
         }
-        return maxArea;
     }
 }
 
