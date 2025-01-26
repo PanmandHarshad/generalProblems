@@ -1,10 +1,18 @@
 package leetcode;
 
+import jdk.swing.interop.DispatcherWrapper;
+
 public class Problem1456 {
     public static void main(String[] args) {
         System.out.println(maxVowels("abciiidef", 3));
         System.out.println(maxVowels("aeiou", 2));
         System.out.println(maxVowels("leetcode", 3));
+        System.out.println(maxVowels("ibpbhixfiouhdljnjfflpapptrxgcomvnb", 33));
+        System.out.println("--------------------------------");
+        System.out.println(maxVowels1("abciiidef", 3));
+        System.out.println(maxVowels1("aeiou", 2));
+        System.out.println(maxVowels1("leetcode", 3));
+        System.out.println(maxVowels1("ibpbhixfiouhdljnjfflpapptrxgcomvnb", 33));
     }
 
     static public int maxVowels(String s, int k) {
@@ -25,59 +33,59 @@ public class Problem1456 {
 
         maxVowels = currentVowels;
 
-        // Slide the window over the string
-        // Considering that we have moved the window by 1.
-        // Here we will be adding the window from index 1 to index k
-        // Subtracting the left most character (here index 0) from window.
-        // Removing the count of subtracted character if that was vowel.
         for (int i = 0; i + k < s.length(); i++) {
-            // Remove the effect of the character that is leaving the window
             char ch = s.charAt(i);
             if (isVowel(ch)) {
                 currentVowels--;
             }
-            // Add the effect of the new character that enters the window
+
             char ch1 = s.charAt(i + k);
             if (isVowel(ch1)) {
                 currentVowels++;
             }
-            // Update the maximum vowels count
+
             maxVowels = Math.max(maxVowels, currentVowels);
         }
 
         return maxVowels;
     }
 
-
+    // Most efficient solution
     static public int maxVowels1(String s, int k) {
         if (s.length() < k) {
             return 0;
         }
+        int length = s.length();
+        int count = 0;
+        int maxCount;
 
-        int maxCount = Integer.MIN_VALUE;
+        int[] vowels = new int[128];
+        vowels['a'] = 1;
+        vowels['e'] = 1;
+        vowels['i'] = 1;
+        vowels['o'] = 1;
+        vowels['u'] = 1;
 
-        for (int i = 0; i + k <= s.length(); i++) {
-            int left = i;
-            int right = i + k - 1;
-            int count = 0;
-            while (left < right) {
-                if (isVowel(s.charAt(left))) {
-                    count++;
-                }
-                if (isVowel(s.charAt(right))) {
-                    count++;
-                }
-                left++;
-                right--;
-            }
-            if (left == right) {
-                if (isVowel(s.charAt(left)))
-                    count++;
-            }
-            if (count > maxCount) {
-                maxCount = count;
-            }
+        for (int i = 0; i < k; i++) {
+            count += vowels[s.charAt(i)];
         }
+
+        if (count >= k) {
+            return k;
+        }
+
+        maxCount = count;
+
+        for (int i = k; i < length; i++) {
+            count += vowels[s.charAt(i)] - vowels[s.charAt(i - k)];
+
+            if (count >= k)
+                return k;
+
+            if (count > maxCount)
+                maxCount = count;
+        }
+
         return maxCount;
     }
 
