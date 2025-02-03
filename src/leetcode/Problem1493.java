@@ -10,10 +10,7 @@ public class Problem1493 {
     }
 
     static public int longestSubarray(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
-        }
-        if (nums.length == 1 && nums[0] == 0) {
+        if (nums.length == 0 || nums.length == 1) {
             return 0;
         }
 
