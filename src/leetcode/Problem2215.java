@@ -9,32 +9,34 @@ public class Problem2215 {
         System.out.println(findDifference(new int[]{1, 2, 3, 3}, new int[]{1, 1, 2, 2}));
     }
 
+    // Most efficient solution
     static public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
-        List<List<Integer>> result = new LinkedList<>();
-        HashSet<Integer> given = new HashSet<>();
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
 
-        for (int num : nums2)
-            given.add(num);
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
 
-        List<Integer> subResult = new LinkedList<>();
-        HashSet<Integer> noRepeat = new HashSet<>();
+        for (int no : nums1) {
+            set1.add(no);
+        }
 
-        for (int num : nums1) {
-            if (given.contains(num)) {
-                given.remove(num);
-                noRepeat.add(num);
-            } else {
-                if (!noRepeat.contains(num)) {
-                    subResult.add(num);
-                    noRepeat.add(num);
-                }
+        for (int no : nums2) {
+            set2.add(no);
+        }
+
+        for (int no : set1) {
+            if (!set2.contains(no)) {
+                list1.add(no);
             }
         }
 
-        result.add(subResult);
-        subResult = new LinkedList<>(given);
+        for (int no : set2) {
+            if (!set1.contains(no)) {
+                list2.add(no);
+            }
+        }
 
-        result.add(subResult);
-        return result;
+        return Arrays.asList(list1, list2);
     }
 }
