@@ -1,9 +1,6 @@
 package leetcode;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Problem1657 {
 
@@ -19,6 +16,9 @@ public class Problem1657 {
         if (word1.length() != word2.length()) {
             return false;
         }
+
+        if (word1.equals(word2))
+            return true;
 
         int[] freq1 = new int[26];
         int[] freq2 = new int[26];
