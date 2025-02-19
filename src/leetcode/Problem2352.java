@@ -6,10 +6,11 @@ import java.util.Map;
 
 public class Problem2352 {
     public static void main(String[] args) {
-        //System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
+        System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}));
         System.out.println(equalPairs(new int[][]{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}}));
     }
 
+    // Most efficient solution
     static public int equalPairs(int[][] grid) {
         int n = grid.length;
         int count = 0;
@@ -27,16 +28,6 @@ public class Problem2352 {
         }
 
         return count;
-    }
-
-    static public void print2DArray(int[][] array) {
-        for (int[] row : array) {
-            for (int element : row) {
-                System.out.print(element + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 
     static public int equalPairs2(int[][] grid) {
