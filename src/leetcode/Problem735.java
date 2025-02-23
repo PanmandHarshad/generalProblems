@@ -5,17 +5,11 @@ import java.util.Stack;
 public class Problem735 {
 
     public static void main(String[] args) {
-        int[] result1 = asteroidCollision(new int[]{5, 10, -5});
-        print(result1);
-        int[] result2 = asteroidCollision(new int[]{8, -8});
-        print(result2);
-        int[] result3 = asteroidCollision(new int[]{10, 2, -5});
-        print(result3);
-        int[] result4 = asteroidCollision(new int[]{5, 10, -11});
-        print(result4);
-        int[] result5 = asteroidCollision(new int[]{-2, -1, 1, 2});
-        print(result5);
-
+        print(asteroidCollision(new int[]{5, 10, -5}));
+        print(asteroidCollision(new int[]{8, -8}));
+        print(asteroidCollision(new int[]{10, 2, -5}));
+        print(asteroidCollision(new int[]{5, 10, -11}));
+        print(asteroidCollision(new int[]{-2, -1, 1, 2}));
     }
 
     private static void print(int[] arr) {
@@ -26,28 +20,43 @@ public class Problem735 {
     }
 
     static public int[] asteroidCollision(int[] asteroids) {
+        if (asteroids.length == 0 || asteroids.length == 1) {
+            return asteroids;
+        }
         Stack<Integer> stack = new Stack<>();
 
         for (int asteroid : asteroids) {
-            boolean isDestroyed = false;
-
-            while (!stack.isEmpty() && asteroid < 0 && stack.peek() > 0) {
+            boolean alive = true;
+            while (!stack.isEmpty() && stack.peek() > 0 && asteroid < 0) {
                 if (stack.peek() < -asteroid) {
-                    stack.pop(); // top asteroid is smaller, it gets destroyed
+                    stack.pop();
+                    continue;
                 } else if (stack.peek() == -asteroid) {
-                    stack.pop(); // both are of equal size, both get destroyed
-                    isDestroyed = true;
-                    break;
+                    stack.pop();
+                    alive = false;
                 } else {
-                    isDestroyed = true; // current asteroid is destroyed
-                    break;
+                    alive = false;
                 }
+                break;
             }
 
-            if (!isDestroyed) {
+            if (alive) {
                 stack.push(asteroid);
             }
         }
+
+//        int[] result = new int[stack.size()];
+//        int i = 0;
+//        for (int no : stack) {
+//            result[i++] = no;
+//        }
+
+        /*
+        while both solutions process each asteroid only once,
+        the second solution’s direct manipulation of the stack (via pop and reverse indexing)
+        avoids the extra cost of iterator creation and overhead,
+        making it more efficient in practice.
+         */
 
         int[] result = new int[stack.size()];
         for (int i = stack.size() - 1; i >= 0; i--) {
