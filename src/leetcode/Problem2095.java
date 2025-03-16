@@ -65,7 +65,7 @@ public class Problem2095 {
 
     static public ListNode deleteMiddle(ListNode head) {
         if (head == null || head.next == null) {
-            return head;
+            return null;
         }
 
         ListNode slow = head;
@@ -73,14 +73,12 @@ public class Problem2095 {
         ListNode prev = null;
 
         while (fast != null && fast.next != null) {
-            fast = fast.next.next;
             prev = slow;
             slow = slow.next;
+            fast = fast.next.next;
         }
 
-        if (prev != null) {
-            prev.next = slow.next;
-        }
+        prev.next = slow.next;
 
         return head;
     }
