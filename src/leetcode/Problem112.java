@@ -86,7 +86,7 @@ public class Problem112 {
         if (root.left == null && root.right == null) {
             return root.val == targetSum;
         }
-        return hasPathSum1(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
+        return hasPathSum1(root.left, targetSum - root.val) || hasPathSum1(root.right, targetSum - root.val);
     }
 
 }
