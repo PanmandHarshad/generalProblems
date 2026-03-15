@@ -1,19 +1,81 @@
 package leetcode;
 
+import java.util.Arrays;
+
 public class Problem238 {
     public static void main(String[] args) {
-        int[] ints = productExceptSelf1(new int[]{1, 2, 3, 4});
-        for (int num : ints) {
-            System.out.print(num + ", ");
-        }
-        System.out.println();
-        int[] ints1 = productExceptSelf1(new int[]{-1, 1, 0, -3, 3});
-        for (int num : ints1) {
-            System.out.print(num + ", ");
-        }
+
+        // Test Case 1
+        int[] nums1 = {1, 2, 3, 4};
+        int[] result1 = productExceptSelf(nums1);
+
+        System.out.println("Input: [1,2,3,4]");
+        System.out.println("Your Output: " + Arrays.toString(result1));
+        System.out.println("Expected Output: [24,12,8,6]");
+        System.out.println("----------------------------------");
+
+
+        // Test Case 2 - With Zero
+        int[] nums2 = {1, 2, 0, 4};
+        int[] result2 = productExceptSelf(nums2);
+
+        System.out.println("Input: [1,2,0,4]");
+        System.out.println("Your Output: " + Arrays.toString(result2));
+        System.out.println("Expected Output: [0,0,8,0]");
+        System.out.println("----------------------------------");
+
+
+        // Test Case 3 - Single Zero
+        int[] nums3 = {0, 1, 2, 3};
+        int[] result3 = productExceptSelf(nums3);
+
+        System.out.println("Input: [0,1,2,3]");
+        System.out.println("Your Output: " + Arrays.toString(result3));
+        System.out.println("Expected Output: [6,0,0,0]");
+        System.out.println("----------------------------------");
+
+
+        // Test Case 4 - All Ones
+        int[] nums4 = {1, 1, 1, 1};
+        int[] result4 = productExceptSelf(nums4);
+
+        System.out.println("Input: [1,1,1,1]");
+        System.out.println("Your Output: " + Arrays.toString(result4));
+        System.out.println("Expected Output: [1,1,1,1]");
+        System.out.println("----------------------------------");
+
+
+        // Test Case 5 - Negative Numbers
+        int[] nums5 = {-1, 1, -1, 1};
+        int[] result5 = productExceptSelf(nums5);
+
+        System.out.println("Input: [-1,1,-1,1]");
+        System.out.println("Your Output: " + Arrays.toString(result5));
+        System.out.println("Expected Output: [-1,1,-1,1]");
+        System.out.println("----------------------------------");
+
+
+        // Test Case 6 - Larger Numbers
+        int[] nums6 = {2, 3, 4, 5};
+        int[] result6 = productExceptSelf(nums6);
+
+        System.out.println("Input: [2,3,4,5]");
+        System.out.println("Your Output: " + Arrays.toString(result6));
+        System.out.println("Expected Output: [60,40,30,24]");
+        System.out.println("----------------------------------");
+
+
+        // Test Case 7 - Two Elements
+        int[] nums7 = {5, 10};
+        int[] result7 = productExceptSelf(nums7);
+
+        System.out.println("Input: [5,10]");
+        System.out.println("Your Output: " + Arrays.toString(result7));
+        System.out.println("Expected Output: [10,5]");
+        System.out.println("----------------------------------");
     }
 
-    static public int[] productExceptSelf(int[] nums) {
+    static public int[] productExceptSelf2(int[] nums) {
         int n = nums.length;
         int[] result = new int[n];
 
@@ -46,7 +108,7 @@ public class Problem238 {
     }
 
     // Most efficient solution
-    static public int[] productExceptSelf1(int[] nums) {
+    static public int[] productExceptSelf(int[] nums) {
         int length = nums.length;
         int[] result = new int[length];
 
