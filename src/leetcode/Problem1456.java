@@ -1,7 +1,5 @@
 package leetcode;
 
-import jdk.swing.interop.DispatcherWrapper;
-
 public class Problem1456 {
     public static void main(String[] args) {
         System.out.println(maxVowels("abciiidef", 3));
