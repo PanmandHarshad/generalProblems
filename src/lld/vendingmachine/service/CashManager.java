@@ -10,7 +10,7 @@ public class CashManager {
     private final Map<Denomination, Integer> cashReserve;
     private final Map<Denomination, Integer> insertedCash;
 
-    CashManager(Map<Denomination, Integer> cashReserve) {
+    public CashManager(Map<Denomination, Integer> cashReserve) {
         this.cashReserve = new HashMap<>(cashReserve);
         this.insertedCash = new HashMap<>();
     }
