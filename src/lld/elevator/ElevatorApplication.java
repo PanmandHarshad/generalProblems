@@ -46,10 +46,7 @@ public class ElevatorApplication {
 
                     e2.addStop(floor);
 
-                    System.out.println(
-                            Thread.currentThread().getName()
-                                    + " added stop " + floor
-                    );
+                    System.out.println(Thread.currentThread().getName() + " added stop " + floor);
 
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();

@@ -18,13 +18,7 @@ public class Elevator {
     private final int maxCapacity;
     private final int maxFloor;
 
-    public Elevator(
-            String id,
-            String name,
-            int currentFloor,
-            int maxCapacity,
-            int maxFloor
-    ) {
+    public Elevator(String id, String name, int currentFloor, int maxCapacity, int maxFloor) {
 
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("Elevator id is required");
@@ -35,9 +29,7 @@ public class Elevator {
         }
 
         if (maxCapacity <= 0) {
-            throw new IllegalArgumentException(
-                    "Maximum capacity must be positive"
-            );
+            throw new IllegalArgumentException("Maximum capacity must be positive");
         }
 
         this.id = id;
@@ -55,9 +47,7 @@ public class Elevator {
         validateFloor(floor);
 
         if (elevatorStatus == ElevatorStatus.OUT_OF_SERVICE) {
-            throw new IllegalStateException(
-                    "Cannot add stop to out-of-service elevator"
-            );
+            throw new IllegalStateException("Cannot add stop to out-of-service elevator");
         }
 
         upcomingFloors.add(floor);
@@ -159,9 +149,7 @@ public class Elevator {
         } else if (direction == Direction.DOWN) {
             direction = Direction.UP;
         } else {
-            throw new IllegalStateException(
-                    "Cannot toggle direction when elevator is idle"
-            );
+            throw new IllegalStateException("Cannot toggle direction when elevator is idle");
         }
     }
 
@@ -196,9 +184,7 @@ public class Elevator {
 
     private void validateFloor(int floor) {
         if (floor < 0 || floor > maxFloor) {
-            throw new IllegalArgumentException(
-                    "Invalid floor: " + floor
-            );
+            throw new IllegalArgumentException("Invalid floor: " + floor);
         }
     }
 

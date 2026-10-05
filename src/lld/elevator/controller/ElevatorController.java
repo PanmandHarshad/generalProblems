@@ -22,11 +22,7 @@ public class ElevatorController {
 
         Elevator elevator = selectionPolicy
                 .selectElevator(elevators, request)
-                .orElseThrow(() ->
-                        new IllegalStateException(
-                                "No elevator available"
-                        )
-                );
+                .orElseThrow(() -> new IllegalStateException("No elevator available"));
 
         elevator.addStop(request.getRequestFloor());
     }
@@ -51,10 +47,6 @@ public class ElevatorController {
         return elevators.stream()
                 .filter(elevator -> elevator.getId().equals(elevatorId))
                 .findFirst()
-                .orElseThrow(() ->
-                        new IllegalArgumentException(
-                                "Elevator not found: " + elevatorId
-                        )
-                );
+                .orElseThrow(() -> new IllegalArgumentException("Elevator not found: " + elevatorId));
     }
 }

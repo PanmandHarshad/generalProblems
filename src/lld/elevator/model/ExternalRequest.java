@@ -7,9 +7,7 @@ public class ExternalRequest {
 
     public ExternalRequest(int requestFloor, Direction direction) {
         if (direction == null || direction == Direction.NA) {
-            throw new IllegalArgumentException(
-                    "External request direction must be UP or DOWN"
-            );
+            throw new IllegalArgumentException("External request direction must be UP or DOWN");
         }
 
         this.requestFloor = requestFloor;
