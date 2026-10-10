@@ -194,4 +194,64 @@ public class BookingService {
             }
         }
     }
+
+    public void confirmBooking(SeatLock seatLock) {
+        if (seatLock == null) {
+            throw new IllegalArgumentException("SeatLock cannot be null.");
+        }
+
+        List<ShowSeat> orderedShowSeats = new ArrayList<>(seatLock.getShowSeatList());
+
+        orderedShowSeats.sort(Comparator.comparing(ShowSeat::getId));
+
+        List<ShowSeat> acquiredLocks = new ArrayList<>();
+        Booking booking = seatLock.getBooking();
+
+        try {
+            // 1. Acquire all seat locks in sorted order.
+            for (ShowSeat showSeat : orderedShowSeats) {
+                if (!showSeat.tryAcquireLock()) {
+                    throw new IllegalStateException("A selected seat is currently being processed.");
+                }
+
+                acquiredLocks.add(showSeat);
+            }
+
+            // 2. Validate booking status.
+            if (booking.getBookingStatus() != BookingStatus.PENDING) {
+                throw new IllegalStateException("Booking is not pending.");
+            }
+
+            // 3. Verify at least one payment succeeded.
+            boolean paymentSuccessful =
+                    booking.getPaymentList().stream()
+                            .anyMatch(payment ->
+                                    payment.getPaymentStatus() == PaymentStatus.SUCCESS);
+
+            if (!paymentSuccessful) {
+                throw new IllegalStateException("No successful payment found.");
+            }
+
+            // 4. Validate ownership of ALL seats before changing any.
+            for (ShowSeat showSeat : orderedShowSeats) {
+                if (!showSeat.isLockedBy(seatLock.getSeatLockId())) {
+                    throw new IllegalStateException("Seat is not locked by this reservation.");
+                }
+            }
+
+            // 5. Confirm every seat.
+            for (ShowSeat showSeat : orderedShowSeats) {
+                showSeat.markBookedBy(seatLock.getSeatLockId());
+            }
+
+            // 6. Confirm the booking.
+            booking.setBookingStatus(BookingStatus.CONFIRMED);
+
+        } finally {
+            // 7. Release only locks acquired by this thread.
+            for (int i = acquiredLocks.size() - 1; i >= 0; i--) {
+                acquiredLocks.get(i).releaseLock();
+            }
+        }
+    }
 }

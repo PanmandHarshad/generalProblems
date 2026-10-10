@@ -96,6 +96,23 @@ public class ShowSeat {
         }
     }
 
+    public void markBookedBy(String seatLockId) {
+        lock.lock();
+        try {
+            if (showSeatStatus != ShowSeatStatus.LOCKED
+                    || !java.util.Objects.equals(
+                    activeSeatLockId, seatLockId)) {
+                throw new IllegalStateException(
+                        "Seat is not locked by this reservation.");
+            }
+
+            showSeatStatus = ShowSeatStatus.BOOKED;
+            activeSeatLockId = null;
+        } finally {
+            lock.unlock();
+        }
+    }
+
     public void releaseReservation(String seatLockId) {
         lock.lock();
         try {
@@ -110,6 +127,7 @@ public class ShowSeat {
             lock.unlock();
         }
     }
+
 
     public boolean tryAcquireLock() {
         return lock.tryLock();
