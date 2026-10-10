@@ -1,4 +1,4 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
 
 import java.util.List;
 

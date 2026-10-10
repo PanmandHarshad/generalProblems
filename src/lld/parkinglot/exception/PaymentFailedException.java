@@ -1,4 +1,4 @@
-package lld.parkinglot;
+package lld.parkinglot.exception;
 
 public class PaymentFailedException extends RuntimeException{
 }

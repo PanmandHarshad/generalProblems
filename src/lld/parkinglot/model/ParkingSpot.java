@@ -1,6 +1,9 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
 
-class ParkingSpot {
+import lld.parkinglot.model.enums.ParkingStatus;
+import lld.parkinglot.model.enums.VehicleType;
+
+public class ParkingSpot {
 
     private final String spotId;
     private final VehicleType supportedVehicleType;

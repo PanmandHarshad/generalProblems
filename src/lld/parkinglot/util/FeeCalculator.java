@@ -1,11 +1,14 @@
-package lld.parkinglot;
+package lld.parkinglot.util;
+
+import lld.parkinglot.model.Ticket;
+import lld.parkinglot.model.enums.VehicleType;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
 
-class FeeCalculator {
+public class FeeCalculator {
 
     private final Map<VehicleType, BigDecimal> hourlyRates;
 

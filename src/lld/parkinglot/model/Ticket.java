@@ -1,8 +1,10 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
+
+import lld.parkinglot.model.enums.TicketStatus;
 
 import java.time.Instant;
 
-class Ticket {
+public class Ticket {
 
     private final String ticketId;
     private final Vehicle vehicle;

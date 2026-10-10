@@ -1,4 +1,11 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
+
+import lld.parkinglot.exception.PaymentFailedException;
+import lld.parkinglot.model.enums.PaymentStatus;
+import lld.parkinglot.model.enums.TicketStatus;
+import lld.parkinglot.service.ParkingSpotService;
+import lld.parkinglot.service.PaymentService;
+import lld.parkinglot.util.FeeCalculator;
 
 import java.math.BigDecimal;
 import java.time.Instant;

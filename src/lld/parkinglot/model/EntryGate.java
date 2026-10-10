@@ -1,4 +1,7 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
+
+import lld.parkinglot.exception.ParkingSpotNotAvailableException;
+import lld.parkinglot.service.ParkingSpotService;
 
 import java.time.Instant;
 import java.util.UUID;

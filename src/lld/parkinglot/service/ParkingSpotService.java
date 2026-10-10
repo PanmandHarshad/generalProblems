@@ -1,6 +1,12 @@
-package lld.parkinglot;
+package lld.parkinglot.service;
 
-class ParkingSpotService {
+import lld.parkinglot.exception.ParkingSpotNotAvailableException;
+import lld.parkinglot.model.ParkingFloor;
+import lld.parkinglot.model.ParkingLot;
+import lld.parkinglot.model.ParkingRequest;
+import lld.parkinglot.model.ParkingSpot;
+
+public class ParkingSpotService {
 
     private final ParkingLot parkingLot;
 

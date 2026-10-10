@@ -1,4 +1,6 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
+
+import lld.parkinglot.model.enums.VehicleType;
 
 public class Vehicle {
     String licenseNumber;

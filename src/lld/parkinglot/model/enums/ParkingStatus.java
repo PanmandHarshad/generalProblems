@@ -1,4 +1,4 @@
-package lld.parkinglot;
+package lld.parkinglot.model.enums;
 
 public enum ParkingStatus {
     AVAILABLE,

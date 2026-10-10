@@ -1,4 +1,4 @@
-package lld.parkinglot;
+package lld.parkinglot.model;
 
 public class ParkingRequest {
     private final Vehicle vehicle;
