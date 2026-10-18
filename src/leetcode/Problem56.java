@@ -33,6 +33,33 @@ public class Problem56 {
         return result.toArray(new int[0][]);
     }
 
+    public static int[][] merge1(int[][] intervals) {
+        if (intervals.length <= 1) {
+            return intervals;
+        }
+
+        List<int[]> resultList = new ArrayList<>();
+
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] <= end) {
+                end = Math.max(end, intervals[i][1]);
+            } else {
+                resultList.add(new int[]{start, end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }
+        }
+
+        resultList.add(new int[]{start, end});
+
+        return resultList.toArray(new int[resultList.size()][]);
+    }
+
     public static void main(String[] args) {
 
         int[][][] testCases = {
