@@ -20,11 +20,15 @@ public class NotificationTask implements Runnable {
         try {
             Thread.sleep(1000); // Simulate external API call
             System.out.println("Notification sent: " + notificationId);
-            metrics.completedTasks.incrementAndGet();
+            metrics.incrementCompleted();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Notification interrupted: " + notificationId);
-            metrics.failedTasks.incrementAndGet();
+            metrics.incrementFailed();
+        } catch (Exception exception) {
+            System.out.println("Notification failed: " + notificationId +
+                    " | Reason: " + exception.getMessage());
+            metrics.incrementFailed();
         }
     }
 }

@@ -1,5 +1,6 @@
 package notification;
 
+import java.util.List;
 import java.util.concurrent.*;
 
 public class NotificationService {
@@ -22,7 +23,7 @@ public class NotificationService {
             try {
                 executor.execute(new NotificationTask(i, metrics));
             } catch (RejectedExecutionException e) {
-                metrics.rejectedTasks.incrementAndGet();
+                metrics.incrementRejected();
             }
         }
 
@@ -30,7 +31,13 @@ public class NotificationService {
         executor.shutdown();
         try {
             if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
+                List<Runnable> remainingTasks = executor.shutdownNow();
+
+                System.out.println("Tasks not started: " + remainingTasks.size());
+
+                if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
+                    System.out.println("Executor did not terminate");
+                }
             }
         } catch (InterruptedException e) {
             executor.shutdownNow();
@@ -38,8 +45,8 @@ public class NotificationService {
         }
 
         // Print only after termination
-        System.out.println("Completed: " + metrics.completedTasks.get());
-        System.out.println("Failed: " + metrics.failedTasks.get());
-        System.out.println("Rejected: " + metrics.rejectedTasks.get());
+        System.out.println("Completed: " + metrics.getCompleted());
+        System.out.println("Failed: " + metrics.getFailed());
+        System.out.println("Rejected: " + metrics.getRejected());
     }
 }
